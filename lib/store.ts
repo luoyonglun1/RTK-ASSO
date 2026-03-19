@@ -1,12 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit'
 import counterSlice from './features/counter/counterSlice'
+import { productApi } from './features/products/productApi'
 
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
-        counter : counterSlice
+        counter : counterSlice ,
+        [productApi.reducerPath] : productApi.reducer
     },
+    middleware: (getDefaultMiddleWare) => getDefaultMiddleWare().concat(productApi.middleware) 
   })
 }
 
